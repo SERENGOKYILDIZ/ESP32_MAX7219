@@ -16,7 +16,6 @@ void setup() {
 }
 
 void loop() {
-
   Write_Current(7);
   Write_Voltage(12);
   delay(2000);
@@ -62,7 +61,7 @@ int Convert_BCD(int value)
     return 0x70;
 
     case 8:
-    return 0xFF;
+    return 0x7F;
 
     case 9:
     return 0x7B;
@@ -106,6 +105,7 @@ void Write_Current(float current)
 
   int val1 = Convert_BCD((int)current/10);
   int val2 = Convert_BCD(((int)current)%10);
+  //Serial.printf("Val1 : 0x%x \t Val2 : 0x%x\n", val1, val2);//For debugging
   max7219_send(seg1, val1); 
   max7219_send(seg2, val2); 
 }
@@ -119,7 +119,7 @@ void Write_Voltage(float voltage)
 
   int val1 = Convert_BCD((int)voltage/10);
   int val2 = Convert_BCD(((int)voltage)%10);
-  Serial.printf("Val1 : 0x%x \t Val2 : 0x%x\n", val1, val2);
+  //Serial.printf("Val1 : 0x%x \t Val2 : 0x%x\n", val1, val2);//For debugging
   max7219_send(seg1, val1); 
   max7219_send(seg2, val2); 
 }
